@@ -54,6 +54,8 @@
                     @endif
 
                     You are logged in!
+                    <br>
+                    session: {{ json_encode($session_key) }}
                 </div>
             </div>
         </div>

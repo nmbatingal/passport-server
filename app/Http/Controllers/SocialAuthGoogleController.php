@@ -10,17 +10,17 @@ use Illuminate\Http\Request;
 
 class SocialAuthGoogleController extends Controller
 {
-    public function redirectToProvider()
+    public function redirectToProvider($provider = 'google')
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
-    public function handleProviderCallback()
+    public function handleProviderCallback($provider = 'google')
     {
         try {
             
-            $googleUser = Socialite::driver('google')->user();
-            $existUser  = User::where('email',$googleUser->email)->first();
+            $googleUser = Socialite::driver($provider)->user();
+            $existUser  = User::where('email', $googleUser->email)->first();
 
             if($existUser) {
                 Auth::loginUsingId($existUser->id);
@@ -43,7 +43,7 @@ class SocialAuthGoogleController extends Controller
             // return dd($googleUser);
         } 
         catch (Exception $e) {
-            return 'error';
+            return response()->json($e);
         }
     }
 }

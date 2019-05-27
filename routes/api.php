@@ -31,9 +31,9 @@ use Illuminate\Http\Request;
 //     });
 // });
 
-Route::post('/sessions/server', function (Request $request) {
-    Storage::disk('local')->put('file.txt', $request->get('session_id'));
-});
+// Route::post('/sessions/server', function (Request $request) {
+//     Storage::disk('local')->put('file.txt', $request->get('session_id'));
+// });
 
 Route::middleware('auth:api')->get('/todos', function (Request $request) {
     return $request->user();
